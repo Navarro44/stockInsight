@@ -1,5 +1,5 @@
 import replicate
-import shift
+import mySite
 
 def getOutput(myNumber):
     for event in replicate.stream(

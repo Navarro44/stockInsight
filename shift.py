@@ -1,7 +1,5 @@
-from sec_edgar_downloader import Downloader
 from bs4 import BeautifulSoup
 import os
-import mySite
 
 # Set the directory where you want to start the traversal
 

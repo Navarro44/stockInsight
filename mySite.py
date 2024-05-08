@@ -46,7 +46,7 @@ def menu(name):
 st.sidebar.title("Stock Insight")
 
 # NEW
-menuChoice = st.sidebar.radio("Learn about the process and get started.", ["Explanation", "Start"])
+menuChoice = st.sidebar.radio("Learn about the process and get started.", ["Explanation", "Start"], key = "<uniquevalueofsomesort>")
 if menuChoice == "Explanation":
     menu("Explanation")
 elif menuChoice == "Start":

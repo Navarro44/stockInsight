@@ -7,7 +7,6 @@ import shift
 import download
 import llama2
 
-
 def menu(name):
     st.title(name) # NEW
     if name == "Explanation":
@@ -23,6 +22,7 @@ def menu(name):
         st.write("In this project, I decided to specifically take a look at the net income and basic earnings per share metrics. To me, these were the most important factors into taking consideration whether to invest on a company or not. Net income representes the amount of money left over after the business: invested into research, generated its products, paid its providers, rewarded its workers, financed its banks, and dished out government taxes. This amount is the money that belongs to the company and its shareholders, thus, based on this number, shareholders make the decision to reinvest or distribute dividends. Earnings per share represents the company's profitability by showing how much money a business makes for each share of its stock, in other words, how much the investor benefits from having a stock in the business. In the Start tab to the left, you will be able to see the progression of these two for a company of your choosing, and be provided with a LLM response providing insight into the matter.")
 
     elif name == "Start":
+        llmtext = "LLM Token Limit Reached"
         st.header("Get Started")
         with st.form("my_form"):
             st.write("Calculation:")
@@ -31,6 +31,8 @@ def menu(name):
             if submitted:
                 download.downloadDocuments(chosenTicker)
                 shift.traversal(chosenTicker)
+                #llmtext += llama2.getOutput(shift.netIncome, shift.earningsPerShare, chosenTicker)
+
             
         incomeData = shift.netIncome
         # Convert the dictionary to a DataFrame
@@ -38,8 +40,8 @@ def menu(name):
         data.index.name = 'Year'
         data.reset_index(inplace=True)
         # Plot the chart
-        st.subheader('Net Income Across Time')
         st.bar_chart(data.set_index('Year'))
+        st.subheader('Net Income Across Time')
 
         earningsData = shift.earningsPerShare
         # Convert the dictionary to a DataFrame
@@ -47,11 +49,12 @@ def menu(name):
         data2.index.name = 'Year'
         data2.reset_index(inplace=True)
         # Plot the chart
-        st.subheader('Earnings Per Share Across Time')
         st.bar_chart(data2.set_index('Year'))
+        st.subheader('Earnings Per Share Across Time')
 
-
-
+        st.divider()
+        st.subheader("Insight from LLM")
+        st.write(llmtext)
         
 # Create navigation sidebar
 st.sidebar.title("Stock Insight")

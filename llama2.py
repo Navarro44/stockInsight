@@ -1,21 +1,21 @@
 import replicate
-import mySite
+import os
 
-def getOutput(myNumber):
+os.environ["REPLICATE_API_TOKEN"] = "r8_LrhfU7BnMOC6zZL72pFdiQoEXtZVN932pd8Bn"
+api = replicate.Client(api_token=os.environ["REPLICATE_API_TOKEN"])
+
+def getOutput(netIncomeDict, earningsPerShareDict, ticker):
+    text = ""
     for event in replicate.stream(
-        "meta/llama-2-70b-chat",
+        "meta/meta-llama-3-70b-instruct",
         input={
-            "prompt": "Create a poem about the number" + str(myNumber) + "."
+            "prompt": "You are a financial specialist and will analyze the following two dictionaries to determine if the user should invest in the " + ticker + " company. The first dictionary represents net income across time, and the second represents earnings per share across time. Write a paragraph providing insight and calculating the following years net income, and earnings per share." + str(netIncomeDict) + ", " + str(earningsPerShareDict),
         },
-    ):
-        print(str(event), end="")
+        ):
+            text += str(event)
+    return text
 
 
-""" def downloadDocuments(ticker):
-    directory = "sec-edgar-filings/"
-    for path, folders, files in os.walk(directory):
-        for folder in folders:
-            if folder == ticker:
-                return
-    dl = Downloader("Personal", "jorgenavarrogracia@gmail.com")
-    dl.get("10-K", ticker, after=start_date) """
+
+
+

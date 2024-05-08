@@ -5,7 +5,8 @@ import os
 
 root_dir = '/sec-edgar-filings'
 
-grossProfit = {}
+netIncome = {}
+earningsPerShare = {}
 
 def getInfo(filePath):
     with open(filePath, "r") as f:
@@ -22,9 +23,14 @@ def getInfo(filePath):
     
     tag_list = doc.find_all()
     for tag in tag_list:
-        if tag.name == 'us-gaap:grossprofit' and context == tag['contextref']:
+        if tag.name == 'us-gaap:netincomeloss' and context == tag['contextref']:
             try:
-                grossProfit[int(focusYear)] = int(tag.text)
+                netIncome[int(focusYear)] = int(tag.text)
+            except ValueError:
+                continue
+        if tag.name == 'us-gaap:earningspersharebasic' and context == tag['contextref']:
+            try:
+                earningsPerShare[int(focusYear)] = int(tag.text)
             except ValueError:
                 continue
     

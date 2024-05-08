@@ -32,14 +32,24 @@ def menu(name):
                 download.downloadDocuments(chosenTicker)
                 shift.traversal(chosenTicker)
             
-        stock_data = shift.grossProfit
+        incomeData = shift.netIncome
         # Convert the dictionary to a DataFrame
-        data = pd.DataFrame.from_dict(stock_data, orient='index', columns=['Price'])
+        data = pd.DataFrame.from_dict(incomeData, orient='index', columns=['Price'])
         data.index.name = 'Year'
         data.reset_index(inplace=True)
         # Plot the chart
-        st.subheader('Stock Price by Year')
+        st.subheader('Net Income Across Time')
         st.bar_chart(data.set_index('Year'))
+
+        earningsData = shift.earningsPerShare
+        # Convert the dictionary to a DataFrame
+        data = pd.DataFrame.from_dict(earningsData, orient='index', columns=['Price'])
+        data.index.name = 'Year'
+        data.reset_index(inplace=True)
+        # Plot the chart
+        st.subheader('Earnings Per Share Across Time')
+        st.bar_chart(data.set_index('Year'))
+
 
 
         

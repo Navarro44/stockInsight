@@ -16,23 +16,26 @@ def getInfo(filePath):
     if metadata is not None:
         context = metadata["contextref"]
         focusYear = metadata.text
-        print(focusYear)
     else:
         context = ""
         focusYear = 0
     
     tag_list = doc.find_all()
     for tag in tag_list:
+        if tag.name == 'us-gaap:earningspersharebasic' and context == tag['contextref']:
+            try:
+                earningsPerShare[int(focusYear)] = float(tag.text)
+            except ValueError:
+                print("Error")
         if tag.name == 'us-gaap:netincomeloss' and context == tag['contextref']:
             try:
                 netIncome[int(focusYear)] = int(tag.text)
             except ValueError:
-                continue
-        if tag.name == 'us-gaap:earningspersharebasic' and context == tag['contextref']:
-            try:
-                earningsPerShare[int(focusYear)] = int(tag.text)
-            except ValueError:
-                continue
+                print("Error")
+
+
+
+    
     
 def traversal(ticker):
     directory = "sec-edgar-filings/" + ticker + "/10-K"
@@ -42,7 +45,6 @@ def traversal(ticker):
             if fileExtension == ".txt":
                 getInfo(path + "/" + fileName)
             
-
 
 #grossprofit
 #operatingexpenses

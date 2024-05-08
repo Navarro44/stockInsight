@@ -8,14 +8,17 @@ import download
 import llama2
 
 def menu(name):
-    st.title(name) # NEW
+    st.title(name) 
     if name == "Explanation":
+        # Explanation Section
         st.header("_Process and Research_")
         filing_image = os.path.join("images/10k.png")
         st.image(filing_image, width=600)
         st.write("A 10-K filing is an annual report that publicly traded companies are required to submit to the U.S. Securities and Exchange Commission (SEC). The 10-K provides a comprehensive overview of the company's business, financial performance, and operations for the previous fiscal year. It serves as a crucial source of information for investors, analysts, and other stakeholders, offering valuable insights into the company's financial health, competitive position, and future prospects. The 10-K filing provides value to investors and other stakeholders by offering transparency into the company's operations, financial performance, and risk factors. It serves as a comprehensive source of information for making informed investment decisions, assessing the company's competitive position, and evaluating its long-term prospects.")
 
         st.divider()
+
+        #Analytical Decisions Section
         st.header("_Analytical Decisions_")
         analysis_image = os.path.join("images/analysis.png")
         st.image(analysis_image, width=600)
@@ -26,14 +29,19 @@ def menu(name):
         st.header("Get Started")
         with st.form("my_form"):
             st.write("Calculation:")
+            #Radio buttons so user can choose desired stock.
             chosenTicker = st.radio("Choose your desired stock: ",["TSLA", "AAPL", "MSFT"])
             submitted = st.form_submit_button("Submit")
             if submitted:
+                #If user clicks submit the script will do the following.
+                #1.) Download the necessary documents with the ticker input
                 download.downloadDocuments(chosenTicker)
+                #2.) Traverse throught the companies folders, retrieving the necessary info to build the dictionaries.
                 shift.traversal(chosenTicker)
+                #3.) Use the dictionaries to create llm insight output based on the recollected data.
                 #llmtext += llama2.getOutput(shift.netIncome, shift.earningsPerShare, chosenTicker)
 
-            
+        #Net Income across years
         incomeData = shift.netIncome
         # Convert the dictionary to a DataFrame
         data = pd.DataFrame.from_dict(incomeData, orient='index', columns=['Amount'])
@@ -43,6 +51,7 @@ def menu(name):
         st.bar_chart(data.set_index('Year'))
         st.subheader('Net Income Across Time')
 
+        #Earning per share across years
         earningsData = shift.earningsPerShare
         # Convert the dictionary to a DataFrame
         data2 = pd.DataFrame.from_dict(earningsData, orient='index', columns=['Amount'])
@@ -53,13 +62,15 @@ def menu(name):
         st.subheader('Earnings Per Share Across Time')
 
         st.divider()
+
+        #LLM Output not functional due to tokens
         st.subheader("Insight from LLM")
         st.write(llmtext)
         
 # Create navigation sidebar
 st.sidebar.title("Stock Insight")
 
-# NEW
+#Create choices in sidebar to allow user to switch between tabs.
 menuChoice = st.sidebar.radio("Learn about the process and get started.", ["Explanation", "Start"], key = "<uniquevalueofsomesort>")
 if menuChoice == "Explanation":
     menu("Explanation")

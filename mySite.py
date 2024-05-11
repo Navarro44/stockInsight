@@ -64,7 +64,6 @@ def menu(name):
         # Plot the chart
         st.subheader('Earnings Per Share Across Time')
         st.bar_chart(data2.set_index('Year'))
-
         st.divider()
 
         #LLM Output not functional due to tokens

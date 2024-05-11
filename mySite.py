@@ -43,27 +43,27 @@ def menu(name):
                 #2.) Traverse throught the companies folders, retrieving the necessary info to build the dictionaries.
                 shift.traversal(chosenTicker)
 
-            # Net income across years
-            incomeData = shift.netIncome
+        # Net income across years
+        incomeData = shift.netIncome
 
-            # Convert the dictionary to a DataFrame
-            data = pd.DataFrame.from_dict(incomeData, orient='index')
-            data.index.name = 'Year'
-            data.reset_index(inplace=True)
-            # Plot the chart
-            st.subheader('Net Income Across Time')
-            st.bar_chart(data.set_index('Year'))
+        # Convert the dictionary to a DataFrame
+        data = pd.DataFrame.from_dict(incomeData, orient='index')
+        data.index.name = 'Year'
+        data.reset_index(inplace=True)
+        # Plot the chart
+        st.subheader('Net Income Across Time')
+        st.bar_chart(data.set_index('Year'))
 
-            #Earning per share across years
-            earningsData = shift.earningsPerShare
+        #Earning per share across years
+        earningsData = shift.earningsPerShare
 
-            # Convert the dictionary to a DataFrame
-            data2 = pd.DataFrame.from_dict(earningsData, orient='index', columns=['Amount in USD'])
-            data2.index.name = 'Year'
-            data2.reset_index(inplace=True)
-            # Plot the chart
-            st.subheader('Earnings Per Share Across Time')
-            st.bar_chart(data2.set_index('Year'))
+        # Convert the dictionary to a DataFrame
+        data2 = pd.DataFrame.from_dict(earningsData, orient='index', columns=['Amount in USD'])
+        data2.index.name = 'Year'
+        data2.reset_index(inplace=True)
+        # Plot the chart
+        st.subheader('Earnings Per Share Across Time')
+        st.bar_chart(data2.set_index('Year'))
 
         st.divider()
 

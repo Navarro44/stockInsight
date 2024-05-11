@@ -28,8 +28,8 @@ def menu(name):
         st.title("Get Started")
         st.subheader("Steps to function:")
         st.write("1.) Input your stock, and click submit.")
-        st.write("2.) Wait until program stops running and graphs are published below (It may take some time).")
-        st.write("3.) After graphs are published, go to: https://aistudio.google.com/app/apikey, to get your api key and input it to recieve additional insight from Google's Gemini Pro LLM.")
+        st.write("2.) Wait until program stops running and graphs are published below (Running logo is shown in top right, buffering may take up to two minutes).")
+        st.write("3.) After graphs are published, go to: https://aistudio.google.com/app/apikey, to get your api key and input it to receive additional insight from Google's Gemini Pro LLM.")
         with st.form("my_form"):
             #Radio buttons so user can choose desired stock.
             chosenTicker = st.radio("Choose your stock: ",["TSLA", "AAPL", "MSFT"])

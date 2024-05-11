@@ -47,7 +47,7 @@ def menu(name):
         incomeData = shift.netIncome
 
         # Convert the dictionary to a DataFrame
-        data = pd.DataFrame.from_dict(incomeData, orient='index')
+        data = pd.DataFrame.from_dict(incomeData, orient='index', columns=['Amount in USD'])
         data.index.name = 'Year'
         data.reset_index(inplace=True)
         # Plot the chart

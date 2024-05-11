@@ -34,10 +34,6 @@ def getInfo(filePath):
                 netIncome[int(focusYear)] = int(tag.text)
             except ValueError:
                 print("Error")
-
-
-
-    
     
 def traversal(ticker):
     #Traverses through the different folders, and gets the necessary info once it reaches a .txt file.

@@ -2,3 +2,4 @@ beautifulsoup4==4.12.3
 sec-edgar-downloader==5.0.2
 replicate==0.25.2
 lxml==5.2.1
+google-generativeai==0.5.2

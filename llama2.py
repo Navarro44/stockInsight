@@ -1,7 +1,7 @@
-import replicate
+""" import replicate
 import os
 
-os.environ["REPLICATE_API_TOKEN"] = "r8_LrhfU7BnMOC6zZL72pFdiQoEXtZVN932pd8Bn"
+os.environ["REPLICATE_API_TOKEN"] = "r8_3NMlH8vBs17DcP9XQmqDibFKjtFZkBa4clYoy"
 api = replicate.Client(api_token=os.environ["REPLICATE_API_TOKEN"])
 
 def getOutput(netIncomeDict, earningsPerShareDict, ticker):
@@ -13,9 +13,12 @@ def getOutput(netIncomeDict, earningsPerShareDict, ticker):
         },
         ):
             text += str(event)
-    return text
+    print(text)
 
+income = {2020: 100, 2021: 120, 2022: 200, 2023: 250}
+share = {2020: 3, 2021: 2.5, 2022: 3.2, 2023: 3.4}
 
+getOutput(income, share, "JOEL") """
 
 
 
